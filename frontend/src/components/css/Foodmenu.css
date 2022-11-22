@@ -1,0 +1,11 @@
+.food {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    margin: 10px;
+}
+
+.food h2, p {
+    margin: 5px;
+    font-family: arial;
+}

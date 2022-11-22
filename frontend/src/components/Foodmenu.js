@@ -1,18 +1,23 @@
 // Ehkä joku alikomponentti vielä??
+import "./css/Foodmenu.css";
 
 const Foodmenu = () => {
     const foodItems = [
         {name:"Hampurilainen", price:"8,20e"},
         {name:"Juustohampurilainen", price:"9,00e"}
-    ]
+    ];
     
-    const renderListOfFoods = (foods) => {
-        return foods.map(name => <h2>{foods.name}</h2>)
-    }
+    const listFoods = foodItems.map((food) =>
+    <div className="food">
+        <h2>{food.name}</h2>
+        <p>{food.price}</p>
+    </div>
+    
+    );
 
     return(
         <div>
-            {renderListOfFoods(foodItems)}
+            {listFoods}
         </div>
     );
 };
