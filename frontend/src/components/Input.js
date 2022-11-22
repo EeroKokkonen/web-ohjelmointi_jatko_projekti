@@ -3,7 +3,6 @@ import { forwardRef } from "react";
 
 
 const Input = forwardRef(({label, type}, ref) => {
-
     return (
         <div>
             <label className="labelBox">{label}</label>
