@@ -38,21 +38,16 @@ const RegisterInput = () => {
         if(error){
             return;
         }
-
-        
-
     }
 
-    return <div className="pageContainer">
-        <div className="inputContainer">
-            <p className="errorText">{errorText}</p>
-            <Input label={"Etunimi"} ref={firstnameRef}/>
-            <Input label={"Sukunimi"} ref={lastnameRef}/>
-            <Input label={"Osoite"} ref={addressRef}/>
-            <Input label={"Sähköposti"} ref={emailRef}/>
-            <Input label={"Salasana"} type={"password"} ref={passwordRef}/>
-            <button className="btn" onClick={handleSubmit}>Rekisteröidy</button>
-        </div>
+    return <div className="inputContainer">
+        <p className="errorText">{errorText}</p>
+        <Input label={"Etunimi"} ref={firstnameRef}/>
+        <Input label={"Sukunimi"} ref={lastnameRef}/>
+        <Input label={"Osoite"} ref={addressRef}/>
+        <Input label={"Sähköposti"} ref={emailRef}/>
+        <Input label={"Salasana"} type={"password"} ref={passwordRef}/>
+        <button className="btn" onClick={handleSubmit}>Rekisteröidy</button>
 
     </div>
     

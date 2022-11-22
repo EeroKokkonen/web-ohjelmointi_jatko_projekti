@@ -1,4 +1,3 @@
-import Input from "../components/Input";
 import RegisterInput from "../components/RegisterInput";
 import "./css/RegisterPage.css"
 
