@@ -3,8 +3,11 @@ import "./css/RegisterPage.css"
 
 const RegisterPage = () => {
 
+
     return <div className="pageContainer">
-        <RegisterInput/>
+        <div className="inputContainer">
+            <RegisterInput buttonText={"Rekisteröidy"}/>
+        </div>
 
     </div>
 };

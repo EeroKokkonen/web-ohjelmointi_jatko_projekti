@@ -18,7 +18,6 @@ function App() {
         <Route path="/orders" element={ <OrdersPage /> } />
         <Route path="/profile" element={ <ProfilePage /> } />
         <Route path="/register" element={ <RegisterPage /> } />
-
       </Routes>
 
     </div>
