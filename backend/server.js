@@ -2,21 +2,19 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/users');
 const cors = require('cors');
-const { initializeApp } = require('firebase-admin/app');
-
-
-
+const admin = require("firebase-admin");
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-initializeApp({
-    credential: "./privaKey.json",
+// Lisää firebase yhteyden serveriin
+admin.initializeApp({
+    credential: admin.credential.cert("./privaKey.json"),
     databaseURL: 'https://herkkugrilli-database.firebaseio.com'
-
 });
 
+// Cors asetukset
 const corsOptions = {
     origin: 'http://localhost:3000',
     optionsSuccessStatus: 200 // For legacy browser support
@@ -26,34 +24,10 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use("/api/users", userRoutes);
 
+const db = admin.firestore();
+
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-//import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-//const initializeApp =  require('firebase/app');
-
-//const db = getFirestore(app);
-
-
-/*const firebaseConfig = {
-    apiKey: "",
-    authDomain: "herkkugrilli-database.firebaseapp.com",
-    databaseURL: "https://herkkugrilli-database.firebaseio.com",
-    projectId: "herkkugrilli-database",
-    storageBucket: "herkkugrilli-database.appspot.com",
-    messagingSenderId: "id22",
-    appId: "testi22",
-    measurementId: "id",
-};*/
+exports.db = db;
