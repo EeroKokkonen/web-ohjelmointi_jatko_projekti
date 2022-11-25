@@ -8,16 +8,27 @@ const createNewUser = async (req, res) => {
         // Parsii käyttäjän tiedot api pyynnöstä
         const {firstname, lastname, address, email, password} = req.body;
         const today = new Date();
+        const shoppingCart = [{
+            foodName: "",
+            foodPrice: ""
+        }]
+        const orderHistory = [{
+            foodName: "",
+            foodPrice: ""
+        }]
         const newUser = {
             email,
             password,
             firstname,
             lastname,
             address,
+            shoppingCart,
+            orderHistory,
             id: crypto.randomBytes(16).toString('hex'),
             today,
         };
         // Lisää databaseen käyttäjän
+        console.log(newUser)
         const response = await server.db.collection("users").add(newUser);
         console.log("Käyttäjä luotiin onnistuneesti!");
 

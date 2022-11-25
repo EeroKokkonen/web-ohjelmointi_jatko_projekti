@@ -6,7 +6,7 @@ const RegisterPage = () => {
 
     return <div className="pageContainer">
         <div className="inputContainer">
-            <RegisterInput buttonText={"Rekisteröidy"}/>
+            <RegisterInput buttonText={"Rekisteröidy"} apiUrl={"api/users/register"}/>
         </div>
 
     </div>

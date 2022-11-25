@@ -1,10 +1,10 @@
 import Input from "./Input"
 import { useState, useEffect, useRef } from "react";
+import axios from 'axios';
 
 
 
-
-const RegisterInput = ({buttonText, userProfile}) => {
+const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
     if(userProfile == null){
         userProfile = {
             firstname: "",
@@ -23,8 +23,20 @@ const RegisterInput = ({buttonText, userProfile}) => {
     const [errorText, setErrorText] = useState("");
     const [error, setError] = useState(false);
 
-    const handleSubmit = () => {
-        checkError();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!checkError())
+            return;
+            
+        const user = {
+            firstname: firstnameRef.current.value,
+            lastname: lastnameRef.current.value,
+            address:addressRef.current.value,
+            email:emailRef.current.value,
+            password:passwordRef.current.value,
+        }
+        const response = await axios.post(apiUrl, user);
+        console.log(response)
         
     }
 
@@ -78,8 +90,9 @@ const RegisterInput = ({buttonText, userProfile}) => {
             passwordRef.current.style.backgroundColor = normalColor
         
         if(error){
-            return;
+            return false;
         }
+        return true;
 }
     
 };
