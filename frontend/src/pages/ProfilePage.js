@@ -6,12 +6,13 @@ const ProfilePage = () => {
         <>
             <div className="profileContainer">
                 <h2>Profiili</h2>
-                <div className="profileLeft">
+                <div className="profileRight">
                     <p>Muokkaa profiilia</p>
                     <RegisterInput buttonText={"Tallenna"}/>
                 </div>
-                <div className="profileRight">
+                <div className="profileLeft">
                     <button className="orderButton">Tilaukset</button>
+                    <button className="orderButton">Ostoskori</button>
                 </div>
             </div>
         </>

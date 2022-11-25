@@ -18,4 +18,6 @@ const createNewUser = async (req, res, next) => {
     };
 
     
-}
+};
+
+exports.createNewUser = createNewUser;

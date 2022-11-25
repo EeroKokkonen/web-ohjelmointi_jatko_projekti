@@ -13,7 +13,7 @@
     margin: 5% auto;
 }
 .btn {
-    background-color: #111827;
+    background-color: #de7a00;
     border: 1px solid transparent;
     margin: 1em;
     border-radius: .75rem;
@@ -39,7 +39,7 @@
 }
 
 .btn:hover {
-    background-color: #374151;
+    background-color: #ea911c;
 }
 
 .btn:focus {
@@ -48,7 +48,7 @@
     outline-offset: 2px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 910px) {
     .btn {
         padding: .75rem 1.5rem;
     }
