@@ -41,8 +41,11 @@
 body {
     margin: 0px;
     height: 100%;
+    background-color: rgb(243, 246, 249);
 }
 
 #menuHeader {
     text-align: center;
+    font-family: Arial;
+    font-size: xx-large;
 }

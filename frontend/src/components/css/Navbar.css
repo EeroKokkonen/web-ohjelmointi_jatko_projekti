@@ -1,4 +1,5 @@
 .header {
+  font-family: "Inter var", ui-sans-serif, system-ui, system-ui, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 100%;
     height: 5rem;
     display: flex;
@@ -40,31 +41,6 @@
 
   * {
     box-sizing: border-box;
-  }
-  
-  .btn {
-    font: inherit;
-    padding: 0.5rem 1.5rem;
-    cursor: pointer;
-    border-radius: 4px;
-    background-color: #800040;
-    color: white;
-    border: 1px solid #800040;
-    margin: 0 1rem;
-  }
-  
-  .btn:hover {
-    background-color: #9c1458;
-    border-color: #9c1458;
-  }
-  
-  .btn--alt {
-    background-color: transparent;
-    color: #800040;
-  }
-  
-  .btn--alt:hover {
-    background-color: #f8dae9;
   }
   
   .modal {

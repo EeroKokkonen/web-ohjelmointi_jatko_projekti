@@ -11,7 +11,7 @@ const Navbar = () => {
             <Link to="/">Etusivu</Link>
           </li>
           <li>
-            <Link to="/menu">MENU</Link>
+            <Link to="/menu">Menu</Link>
           </li>
           <li>
             <Link to="/orders">Tilaukset</Link>
