@@ -4,6 +4,7 @@ const MainPage = () => {
     return(
         <div id="background">
           <div className="container">
+            <br></br>
             <h1>HerkkuGrilli</h1>
             <h2>Meiltä saat parhaat grilliruuat!</h2>
             <h2 id="OpenText">Aukioloajat:</h2>
