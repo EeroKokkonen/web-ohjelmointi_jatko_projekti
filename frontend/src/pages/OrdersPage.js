@@ -1,6 +1,6 @@
 const OrdersPage = () => {
     return(
-        <h2>Orders</h2>
+        <h2 className="PageHeader">Tilaushistoria</h2>
     );
 };
 

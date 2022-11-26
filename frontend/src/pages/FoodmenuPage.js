@@ -1,9 +1,10 @@
 import Foodmenu from "../components/Foodmenu";
 
 const FoodmenuPage = () => {
+
   return(
     <div>
-        <h2 id="menuHeader">Menu</h2>
+        <h2 className="PageHeader">Menu</h2>
         <Foodmenu />
     </div>
   );

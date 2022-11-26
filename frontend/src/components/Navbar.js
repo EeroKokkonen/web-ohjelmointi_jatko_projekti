@@ -17,6 +17,9 @@ const Navbar = () => {
             <Link to="/orders">Tilaukset</Link>
           </li>
           <li>
+            <Link to="/cart">Ostoskori</Link>
+          </li>
+          <li>
             <Link to="/profile">Profiili</Link>
           </li>
         </ul>

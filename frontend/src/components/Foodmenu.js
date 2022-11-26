@@ -1,5 +1,7 @@
 // Ehkä joku alikomponentti vielä??
 import "./css/Foodmenu.css";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Foodmenu = () => {
     const foodItems = [
@@ -7,18 +9,30 @@ const Foodmenu = () => {
         {name:"Juustohampurilainen", price:"9,00"}
     ];
     
-    const listFoods = foodItems.map((food) =>
-    <div className="food">
-        <h2>{food.name}</h2>
-        <button type="button" className="cartButton">Lisää ostoskoriin</button>
-        <p className="price">{food.price} €</p> 
-    </div>
-    
+    let listFoods = foodItems.map((food) =>
+        <div className="food">
+            <h2>{food.name}</h2>
+            <button type="button" className="cartButton" onClick={() => addToCart()}>Lisää ostoskoriin</button>
+            <p className="price">{food.price} €</p> 
+        </div>
     );
+
+    let addToCart = () => {
+        
+    }
+
+    const fetchMenu = () => {
+        const response = axios.get("api/users/getMenu");
+        console.log(response);
+    }
+
+    useEffect(() => {
+        fetchMenu();
+    }, [])
 
     return(
         <div>
-            {listFoods}
+            <section>{listFoods}</section>
         </div>
     );
 };
