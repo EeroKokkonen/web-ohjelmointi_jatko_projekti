@@ -56,8 +56,8 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
 
 
     function checkError(){
-    const errorColor = "rgba(255, 0, 30, 0.3)";
-        const normalColor = "rgba(255, 255, 255, 1)";
+        const errorColor = "rgba(255, 0, 30, 0.3)";
+        const normalColor = "rgba(0, 0, 0, 0.7)";
         if (firstnameRef.current.value === ""){
             firstnameRef.current.style.backgroundColor = errorColor;
             setError(true);

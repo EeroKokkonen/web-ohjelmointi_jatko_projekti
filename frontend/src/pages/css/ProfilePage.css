@@ -3,6 +3,9 @@
     float: right;
     height: 100%;
 }
+.profileRight p{
+    color:rgb(255, 255, 255);
+}
 .profileLeft {
     margin: auto;
     width: 20%;
@@ -12,11 +15,14 @@
 }
 .profileContainer{
     width: 50%;
-    margin: 5vh;
+    margin: 5vh auto;
     min-height: 550px;
     padding: 1rem;
     min-width: 450px; 
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.profileContainer h2{
+    color:rgb(255, 255, 255);
 }
 .orderButton{
     width:100%;
