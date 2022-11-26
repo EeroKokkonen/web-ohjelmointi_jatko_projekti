@@ -60,8 +60,9 @@ const addProductToShoppingCart = async(req, res) => {
 
 const getMenu = async(req, res) => {
     try{
-        const response = await server.db.collection("menu").get();
-        console.log(response);
+        console.log("Täällä");
+        const response = await server.db.collection("menu").doc("menu").get();
+        res.json(response.data())
 
     } catch(err){
         res.status(400).send(err);
