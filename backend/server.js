@@ -4,6 +4,7 @@ const userRoutes = require('./routes/users');
 const cors = require('cors');
 const admin = require("firebase-admin");
 
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -13,6 +14,7 @@ admin.initializeApp({
     credential: admin.credential.cert("./privaKey.json"),
     databaseURL: 'https://herkkugrilli-database.firebaseio.com'
 });
+
 
 // Cors asetukset
 const corsOptions = {

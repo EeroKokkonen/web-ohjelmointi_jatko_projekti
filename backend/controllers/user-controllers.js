@@ -1,7 +1,6 @@
 const crypto = require('crypto');
 const server = require("../server.js")
 
-
 const createNewUser = async (req, res) => {
     // Luo uuden käyttäjän
     try{
@@ -24,12 +23,12 @@ const createNewUser = async (req, res) => {
             address,
             shoppingCart,
             orderHistory,
-            id: crypto.randomBytes(16).toString('hex'),
             today,
         };
         // Lisää databaseen käyttäjän
-        console.log(newUser)
-        const response = await server.db.collection("users").add(newUser);
+        console.log(newUser);
+
+        const response = await server.db.collection("users").doc(newUser.email).set(newUser);
         console.log("Käyttäjä luotiin onnistuneesti!");
 
         res.status(201).send(`Created a new user: ${response.id}`);
@@ -49,5 +48,37 @@ const getProfile = async (req, res) => {
     }
 }
 
+const addProductToShoppingCart = async(req, res) => {
+    try {
+        const{ email, product } = req.body;
+        const response = await server.db.collection("users").doc(email).update({shoppingCart: FieldValue.arrayUnion(product)});
+        res.status(200).send(response.id);
+    } catch(err) {
+        res.status(400).send(err);
+    }
+}
+
+const getMenu = async(req, res) => {
+    try{
+        const response = await server.db.collection("menu").get();
+        console.log(response);
+
+    } catch(err){
+        res.status(400).send(err);
+    }
+}
+
+const deleteProductFromShoppingCart = async(req, res) => {
+    try{
+        const{id} = req.body;
+        const response = await server.db.collection("users").doc(email).update({shoppingCart: FieldValue.arrayUnion(id)});
+    } catch(err){
+        res.status(400).send(err);
+    }
+};
+
+exports.getMenu = getMenu;
 exports.createNewUser = createNewUser;
 exports.getProfile = getProfile;
+exports.addProductToShoppingCart = addProductToShoppingCart;
+exports.deleteProductFromShoppingCart = deleteProductFromShoppingCart;
