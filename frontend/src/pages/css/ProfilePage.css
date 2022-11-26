@@ -12,7 +12,8 @@
 }
 .profileContainer{
     width: 50%;
-    min-height: 35vh;
+    margin: 5vh;
+    min-height: 550px;
     padding: 1rem;
     min-width: 450px; 
     background-color: white;

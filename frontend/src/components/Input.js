@@ -6,7 +6,7 @@ const Input = forwardRef(({label, type}, ref) => {
     return (
         <div>
             <label className="labelBox">{label}</label>
-            <input className="inputBox"type={type && "text"} ref={ref}/>
+            <input className="inputBox" type={(type)} ref={ref}/>
         </div>
     );
 });
