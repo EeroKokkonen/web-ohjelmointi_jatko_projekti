@@ -13,13 +13,12 @@ const addProductToShoppingCart = async(req, res) => {
 
 const getMenu = async(req, res) => {
     try{
-        const menuRef = db.collection('menu').doc('menu');
+        const menuRef = server.db.collection('menu').doc('menu');
         const doc = await menuRef.get();
         if (!doc.exists)
             return res.status(404).send(err);
 
-        res.json(response.data())
-
+        res.json(doc.data())
     } catch(err){
         res.status(400).send(err);
     }

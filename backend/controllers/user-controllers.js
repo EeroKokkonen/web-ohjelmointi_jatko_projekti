@@ -40,7 +40,7 @@ const createNewUser = async (req, res) => {
 const getProfile = async (req, res) => {
     try {
         const uid = req.params.email;
-        console.log("uid");
+        console.log(uid);
         const profileRef = db.collection('users').doc(uid);
         const doc = await profileRef.get();
 
