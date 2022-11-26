@@ -1,16 +1,40 @@
 // Ehkä joku alikomponentti vielä??
 import "./css/Foodmenu.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Foodmenu = () => {
-    const foodItems = [
+    const [foodItems, setFoodItems] = useState([]);
+    /*const foodItems = [
         {name:"Hampurilainen", price:"8,20"},
         {name:"Juustohampurilainen", price:"9,00"}
-    ];
-    
+    ];*/
+
+    //Suoritetaan sivunlatauksessa
+    const fetchMenu = async () => {
+        //Haetaan backendistä data
+        const response = await axios.get("api/products/getMenu");
+        const fetchedFoods = [];
+
+        //Muunnetaan data array muotoon ja määritetään foodItemsin sisältö
+        for (const key in response.data){
+            fetchedFoods.push({
+                id: key,
+                name: response.data[key].name,
+                price: response.data[key].price,
+            });
+        }
+        setFoodItems(fetchedFoods);
+        console.log(fetchedFoods);
+    }
+
+    useEffect(() => {
+        fetchMenu();
+    }, [])
+
+    //mapataan array muuttujaan
     let listFoods = foodItems.map((food) =>
-        <div className="food">
+        <div className="food" key={food.name}>
             <h2>{food.name}</h2>
             <button type="button" className="cartButton" onClick={() => addToCart()}>Lisää ostoskoriin</button>
             <p className="price">{food.price} €</p> 
@@ -18,17 +42,8 @@ const Foodmenu = () => {
     );
 
     let addToCart = () => {
-        
-    }
 
-    const fetchMenu = () => {
-        const response = axios.get("api/users/getMenu");
-        console.log(response);
     }
-
-    useEffect(() => {
-        fetchMenu();
-    }, [])
 
     return(
         <div>
