@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/users');
+const productRoutes = require('./routes/products');
 const cors = require('cors');
 const admin = require("firebase-admin");
 
@@ -25,6 +26,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
+
 
 const db = admin.firestore();
 

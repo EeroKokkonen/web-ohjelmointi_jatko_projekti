@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const server = require("../server.js")
 
 const createNewUser = async (req, res) => {
@@ -40,46 +39,32 @@ const createNewUser = async (req, res) => {
 
 const getProfile = async (req, res) => {
     try {
-        const userQuerySnapshot = await server.db.collection("users").get();
-        const user = "TESTI";
-        res.status(200).json(user);
+        const uid = req.params.email;
+        console.log("uid");
+        const profileRef = db.collection('users').doc(uid);
+        const doc = await profileRef.get();
+
+        if (!doc.exists)
+            return res.status(404).send(err);
+
+        res.json(response.data())
     } catch (error) {
         res.status(500).send(error);
     }
 }
 
-const addProductToShoppingCart = async(req, res) => {
-    try {
-        const{ email, product } = req.body;
-        const response = await server.db.collection("users").doc(email).update({shoppingCart: FieldValue.arrayUnion(product)});
-        res.status(200).send(response.id);
-    } catch(err) {
+
+
+const login = async(req, res) => {
+    try{
+        const {email, password} = req.body;
+        //const response;
+    } catch (err) {
         res.status(400).send(err);
     }
 }
 
-const getMenu = async(req, res) => {
-    try{
-        console.log("Täällä");
-        const response = await server.db.collection("menu").doc("menu").get();
-        res.json(response.data())
-
-    } catch(err){
-        res.status(400).send(err);
-    }
-}
-
-const deleteProductFromShoppingCart = async(req, res) => {
-    try{
-        const{id} = req.body;
-        const response = await server.db.collection("users").doc(email).update({shoppingCart: FieldValue.arrayUnion(id)});
-    } catch(err){
-        res.status(400).send(err);
-    }
-};
-
-exports.getMenu = getMenu;
+exports.login = login;
 exports.createNewUser = createNewUser;
 exports.getProfile = getProfile;
-exports.addProductToShoppingCart = addProductToShoppingCart;
-exports.deleteProductFromShoppingCart = deleteProductFromShoppingCart;
+
