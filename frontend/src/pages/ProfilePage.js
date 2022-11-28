@@ -7,7 +7,7 @@ const ProfilePage = () => {
             <div className="profileContainer">
                 <h2>Profiili</h2>
                 <div className="profileRight">
-                    <p>Muokkaa profiilia</p>
+                    <h3>Muokkaa profiilia</h3>
                     <RegisterInput buttonText={"Tallenna"}/>
                 </div>
                 <div className="profileLeft">
