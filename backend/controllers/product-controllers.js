@@ -13,8 +13,10 @@ const addProductToShoppingCart = async(req, res) => {
 
 const getMenu = async(req, res) => {
     try{
+        // Etsii menun tietokannasta
         const menuRef = server.db.collection('menu').doc('menu');
         const doc = await menuRef.get();
+        // Tarkastaa löytyykö sitä tietokannasta
         if (!doc.exists)
             return res.status(404).send(err);
 

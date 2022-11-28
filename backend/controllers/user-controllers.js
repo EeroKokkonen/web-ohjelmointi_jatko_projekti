@@ -14,6 +14,7 @@ const createNewUser = async (req, res) => {
             foodName: "",
             foodPrice: ""
         }];
+        // Luo uuden käyttäjä objektin frontendistä tulevien tietojen avulla
         const newUser = {
             email,
             password,
@@ -24,12 +25,13 @@ const createNewUser = async (req, res) => {
             orderHistory,
             today,
         };
-        // Lisää databaseen käyttäjän
-        console.log(newUser);
+        // Etsii tietokannasta käyttäjä collectionin
         const userRef = server.db.collection('users').doc(email);
         const doc = await userRef.get();
-        
+
+        // Tarkistaa löytyykö sähköpostilla tehtyä käyttäjää vielä tietokannasta
         if (!doc.exists) {
+            // Tallentaa käyttäjän databaseen ja lähettää vastauksen frontendiin
             server.db.collection('users').doc(email).set(newUser);
             res.status(201).send(`Created a new user: ${doc.id}`);
             console.log("Käyttäjä luotiin onnistuneesti!");
@@ -47,11 +49,13 @@ const createNewUser = async (req, res) => {
 
 const getProfile = async (req, res) => {
     try {
+        // Parsii uid:n 
         const uid = req.params.email;
         console.log(uid);
         const profileRef = server.db.collection('users').doc(uid);
         const doc = await profileRef.get();
 
+        // Tarkastaa löytyykö profiilia
         if (!doc.exists)
             return res.status(404).send(err);
 
@@ -64,6 +68,7 @@ const getProfile = async (req, res) => {
 
 const login = async(req, res) => {
     try{
+        // Parsii sähköpostin ja salasanan frontendistä tulevasta datasta
         const {email, password} = req.body;
         console.log(email);
         const userRef = server.db.collection('users').doc(email);

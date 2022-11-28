@@ -5,7 +5,7 @@ const productRoutes = require('./routes/products');
 const cors = require('cors');
 const admin = require("firebase-admin");
 
-
+// Asettaa portin, jota ruvetaan kuuntelemaan
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -23,14 +23,16 @@ const corsOptions = {
     optionsSuccessStatus: 200 // For legacy browser support
 };
 
+// Asettaa cors asetukset, polut ja parserin
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 
-
+// Etsii databasen
 const db = admin.firestore();
 
+// Rupeaa kuuntelemaan pyyntöjä asetetusta portista (3001)
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });

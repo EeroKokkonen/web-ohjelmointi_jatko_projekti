@@ -5,10 +5,6 @@ import axios from "axios";
 
 const Foodmenu = () => {
     const [foodItems, setFoodItems] = useState([]);
-    /*const foodItems = [
-        {name:"Hampurilainen", price:"8,20"},
-        {name:"Juustohampurilainen", price:"9,00"}
-    ];*/
 
     //Suoritetaan sivunlatauksessa
     const fetchMenu = async () => {

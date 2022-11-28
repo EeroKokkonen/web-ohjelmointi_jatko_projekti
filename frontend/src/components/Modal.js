@@ -29,16 +29,17 @@ const Modal = (props) => {
     };
 
     try {
+      // Lähettää sähköpostin ja salasanan backendiin, jos käyttäjä löytyy kirjautuu sisälle
       const response = await axios.post("api/users/login", user);
-      console.log(response);
       const token = response.data;
       setToken(token);
-    } catch (err){
+      window.location.reload();
+    } catch (err) {
+      // Jos käyttäjää ei löydy, vaihtaa inputin väriä
       console.log(err);
       userName.current.style.backgroundColor = errorColor;
       password.current.style.backgroundColor = errorColor;
     }
-
   };
 
     return (

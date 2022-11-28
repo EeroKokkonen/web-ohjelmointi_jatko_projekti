@@ -25,9 +25,11 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // Tarkistaa onko kaikissa syötteissä jotain, jos jokin on tyhjänä, se ilmoitaa siitä
         if (!checkError())
             return;
-            
+        
+        // Luo käyttäjälle objektin
         const user = {
             firstname: firstnameRef.current.value,
             lastname: lastnameRef.current.value,
@@ -35,9 +37,8 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
             email:emailRef.current.value,
             password:passwordRef.current.value,
         }
-        const response = await axios.post(apiUrl, user);
-        console.log(response)
-        
+        // Lähettää objektin backendiin, jotta sen voi tallentaa databaseen
+        const response = await axios.post(apiUrl, user);        
     }
 
     return <div className="registerInputContainer">
@@ -56,6 +57,7 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
 
 
     function checkError(){
+        // Tarkistaa, jos jokin syötteistä on tyhjänä
         const errorColor = "rgba(255, 0, 30, 0.3)";
         const normalColor = "rgba(0, 0, 0, 0.7)";
         if (firstnameRef.current.value === ""){
