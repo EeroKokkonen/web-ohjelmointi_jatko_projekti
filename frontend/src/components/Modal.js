@@ -27,8 +27,17 @@ const Modal = (props) => {
       password: password.current.value,
     };
 
-    const response = await axios.post("api/users/login", user);
-    console.log(response);
+    try {
+      const response = await axios.post("api/users/login", user);
+      console.log(response);
+      const token = response.data;
+      localStorage.setItem('token', JSON.stringify(token));
+    } catch (err){
+      console.log(err);
+      userName.current.style.backgroundColor = errorColor;
+      password.current.style.backgroundColor = errorColor;
+    }
+
   };
 
     return (
