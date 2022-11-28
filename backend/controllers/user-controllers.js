@@ -9,11 +9,11 @@ const createNewUser = async (req, res) => {
         const shoppingCart = [{
             foodName: "",
             foodPrice: ""
-        }]
+        }];
         const orderHistory = [{
             foodName: "",
             foodPrice: ""
-        }]
+        }];
         const newUser = {
             email,
             password,
@@ -26,11 +26,18 @@ const createNewUser = async (req, res) => {
         };
         // Lisää databaseen käyttäjän
         console.log(newUser);
-
-        const response = await server.db.collection("users").doc(newUser.email).set(newUser);
-        console.log("Käyttäjä luotiin onnistuneesti!");
-
-        res.status(201).send(`Created a new user: ${response.id}`);
+        const userRef = db.collection('users').doc(email);
+        const doc = await userRef.get();
+        if (!doc.exists) {
+            doc.set(newUser);
+            res.status(201).send(`Created a new user: ${doc.id}`);
+            console.log("Käyttäjä luotiin onnistuneesti!");
+            return;
+        }
+        else {
+            res.status(400).send("Email already exists");
+        }
+        
     } catch (error) {
         res.status(400).send(`Invalid inputs`);
         console.log("Virhe käyttäjän luonnissa..");
@@ -47,22 +54,30 @@ const getProfile = async (req, res) => {
         if (!doc.exists)
             return res.status(404).send(err);
 
-        res.json(response.data())
+        res.json(doc.data())
     } catch (error) {
         res.status(500).send(error);
     }
 }
 
 
-
 const login = async(req, res) => {
     try{
         const {email, password} = req.body;
-        //const response;
+        const userRef = db.collection('users').doc(email);
+        const doc = await userRef.get();
+
+        // Tarkistaa löytyykö käyttäjää ja täsmääkö sen salasana
+        if(doc.exists){
+            if (doc.data.password === password)
+                return res.status(200).send(email);
+        }
+        
+        res.status(400).send("Invalid credentials");
     } catch (err) {
         res.status(400).send(err);
     }
-}
+};
 
 exports.login = login;
 exports.createNewUser = createNewUser;
