@@ -45,7 +45,7 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         <Input label={"Etunimi"} ref={firstnameRef} value={userProfile.firstname}/>
         <Input label={"Sukunimi"} ref={lastnameRef}/>
         <Input label={"Osoite"} ref={addressRef}/>
-        <Input label={"Sähköposti"} ref={emailRef}/>
+        <Input label={"Sähköposti"} ref={emailRef} type={"email"}/>
         <Input label={"Salasana"} type={"password"} ref={passwordRef}/>
         <button className="btn" onClick={handleSubmit}>{buttonText}</button>
         <button className="btn" onClick={console.log("Peruutus")}>Peruuta</button>

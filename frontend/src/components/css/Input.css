@@ -23,6 +23,7 @@
 input,
 label {
     display: block;
+    text-align: left;
 }
 
 .errorText {

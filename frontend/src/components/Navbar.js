@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Modal from "./Modal";
 import "./css/Navbar.css";
+import Backdrop from "./Backdrop";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -36,7 +37,8 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-      {showModal && <Modal onCancel={cancelModalHandler}/>}
+      {showModal && <Modal onCancel={cancelModalHandler} />}
+      {showModal ? <Backdrop onClick={cancelModalHandler} /> : null}
     </header>
   );
 };
