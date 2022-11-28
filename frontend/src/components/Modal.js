@@ -27,7 +27,8 @@ const Modal = (props) => {
       password: password.current.value,
     };
 
-    const response = await axios.post("/login", user);
+    const response = await axios.post("api/users/login", user);
+    console.log(response);
   };
 
     return (

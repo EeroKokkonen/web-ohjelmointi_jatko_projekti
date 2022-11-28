@@ -26,10 +26,14 @@ const createNewUser = async (req, res) => {
         };
         // Lisää databaseen käyttäjän
         console.log(newUser);
-        const userRef = db.collection('users').doc(email);
+        const userRef = server.db.collection('users').doc(email);
+        console.log("testi22");
         const doc = await userRef.get();
+        console.log("testi23");
         if (!doc.exists) {
-            doc.set(newUser);
+            console.log("testi24");
+            server.db.collection('users').doc(email).set(newUser);
+            console.log("testi25");
             res.status(201).send(`Created a new user: ${doc.id}`);
             console.log("Käyttäjä luotiin onnistuneesti!");
             return;
@@ -48,7 +52,7 @@ const getProfile = async (req, res) => {
     try {
         const uid = req.params.email;
         console.log(uid);
-        const profileRef = db.collection('users').doc(uid);
+        const profileRef = server.db.collection('users').doc(uid);
         const doc = await profileRef.get();
 
         if (!doc.exists)
@@ -64,13 +68,16 @@ const getProfile = async (req, res) => {
 const login = async(req, res) => {
     try{
         const {email, password} = req.body;
-        const userRef = db.collection('users').doc(email);
+        console.log(email);
+        const userRef = server.db.collection('users').doc(email);
         const doc = await userRef.get();
 
         // Tarkistaa löytyykö käyttäjää ja täsmääkö sen salasana
         if(doc.exists){
-            if (doc.data.password === password)
-                return res.status(200).send(email);
+            if (doc.data().password === password){
+                res.status(200).send(email);
+                return;
+            }
         }
         
         res.status(400).send("Invalid credentials");
