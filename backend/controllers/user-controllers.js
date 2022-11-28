@@ -27,13 +27,10 @@ const createNewUser = async (req, res) => {
         // Lisää databaseen käyttäjän
         console.log(newUser);
         const userRef = server.db.collection('users').doc(email);
-        console.log("testi22");
         const doc = await userRef.get();
-        console.log("testi23");
+        
         if (!doc.exists) {
-            console.log("testi24");
             server.db.collection('users').doc(email).set(newUser);
-            console.log("testi25");
             res.status(201).send(`Created a new user: ${doc.id}`);
             console.log("Käyttäjä luotiin onnistuneesti!");
             return;
