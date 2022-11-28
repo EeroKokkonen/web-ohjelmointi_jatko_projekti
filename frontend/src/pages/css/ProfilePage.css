@@ -3,7 +3,7 @@
     float: right;
     height: 100%;
 }
-.profileRight p{
+.profileRight h3{
     color:rgb(255, 255, 255);
 }
 .profileLeft {
@@ -47,7 +47,4 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-}
-.orderButton {
-    background-color: #ea911c;
 }
