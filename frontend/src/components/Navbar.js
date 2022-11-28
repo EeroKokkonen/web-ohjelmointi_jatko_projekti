@@ -1,15 +1,24 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Modal from "./Modal";
 import "./css/Navbar.css";
 
 const Navbar = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const showModalHandler = () => {
+    setShowModal(true);
+  };
+
+  const cancelModalHandler = () => {
+    setShowModal(false);
+  };
+
   return (
     <header className="header">
-      <h2>HerkkuGrilli</h2>
+      <Link to="/" id="logo">HerkkuGrilli</Link>
       <nav>
-        <ul>
-          <li>
-            <Link to="/">Etusivu</Link>
-          </li>
+        <ul> 
           <li>
             <Link to="/menu">Menu</Link>
           </li>
@@ -22,8 +31,12 @@ const Navbar = () => {
           <li>
             <Link to="/profile">Profiili</Link>
           </li>
+          <li>
+            <Link onClick={showModalHandler}>Kirjaudu</Link>
+          </li>
         </ul>
       </nav>
+      {showModal && <Modal onCancel={cancelModalHandler}/>}
     </header>
   );
 };
