@@ -24,9 +24,13 @@
     color: white;
 }
 #background {
-    background-image: url("./images/hampurilaisTausta.jpeg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("./images/homepage.jpeg");
     width: 100%;
     height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
     margin-top: 0;
     padding-top: 0;
 }
@@ -38,8 +42,13 @@
 
 body {
     margin: 0px;
-    height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./images/ranskalaisetTausta.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 100vh;
 }
 
 .PageHeader {
