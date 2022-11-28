@@ -1,9 +1,10 @@
 import Input from "./Input.js";
 import { useRef } from "react";
 import axios from "axios";
+import useToken from "../hooks/UseToken"
 
 const Modal = (props) => {
-
+  const {token, setToken} = useToken("");
   const userName = useRef();
   const password = useRef();
   const errorColor = "rgba(255, 0, 30, 0.3)";
@@ -31,7 +32,7 @@ const Modal = (props) => {
       const response = await axios.post("api/users/login", user);
       console.log(response);
       const token = response.data;
-      localStorage.setItem('token', JSON.stringify(token));
+      setToken(token);
     } catch (err){
       console.log(err);
       userName.current.style.backgroundColor = errorColor;
