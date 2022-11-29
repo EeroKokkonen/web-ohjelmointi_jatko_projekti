@@ -23,11 +23,11 @@ const addProductToShoppingCart = async(req, res) => {
 
 const getShoppingCart = async(req, res) => {
     try{
-        const { email, product } = req.body;
+        const { email } = req.body;
 
         // Etsii ostoskorin tietokannasta
         const cartRef = server.db.collection('users').doc(email);
-        const doc = await menuRef.get();
+        const doc = await cartRef.get();
         // Tarkastaa löytyykö sitä tietokannasta
         if (!doc.exists)
             return res.status(404).send(err);
