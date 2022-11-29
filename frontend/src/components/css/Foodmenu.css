@@ -97,3 +97,22 @@
 .deleteButton:hover {
   background-color: #f95b4f;
 }
+
+.sum {
+  font-family: "RM Neue",sans-serif;
+  font-size: larger;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.sumBack {
+    margin: 10px;
+    width: 150px;
+    min-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px;
+}
