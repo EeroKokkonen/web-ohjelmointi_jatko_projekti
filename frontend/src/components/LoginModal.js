@@ -3,14 +3,15 @@ import { useRef } from "react";
 import axios from "axios";
 import useToken from "../hooks/UseToken"
 
-const Modal = (props) => {
+const LoginModal = (props) => {
   const {token, setToken} = useToken("");
   const userName = useRef();
   const password = useRef();
   const errorColor = "rgba(255, 0, 30, 0.3)";
   const normalColor = "rgba(0, 0, 0, 0.7)";
 
-  const logInHandler = async () =>{
+  const logInHandler = async (event) =>{
+    event.preventDefault();
     //Syötteen tarkistus, jos on tyhjät kentät
     if(userName.current.value === ""){
       userName.current.style.backgroundColor = errorColor;
@@ -43,15 +44,15 @@ const Modal = (props) => {
   };
 
     return (
-      <div className="modal">
+      <form className="modal" onSubmit={logInHandler}>
         <p>Kirjaudu</p>
         <Input label={"Sähköposti"} type={"email"} ref={userName}/>
         <Input label={"Salasana"} type={"password"} ref={password}/>
         <a href="/register" id="registerLink">Rekisteröidy</a>
-        <button className="btn" onClick={logInHandler}>Confirm</button>
+        <button className="btn" type="submit">Confirm</button>
         <button className="btn btn--alt" onClick={props.onCancel}>Cancel</button>
-      </div>
+      </form>
     );
   };
   
-  export default Modal;
+  export default LoginModal;

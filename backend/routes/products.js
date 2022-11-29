@@ -7,5 +7,7 @@ const router = express.Router();
 router.get("/getMenu", productControllers.getMenu);
 router.post("/addProductToShoppingCard", productControllers.addProductToShoppingCart);
 router.delete("/deleteProductFromShoppingCard", productControllers.deleteProductFromShoppingCart);
+router.get("/getShoppingCart", productControllers.getShoppingCart);
+
 
 module.exports = router;

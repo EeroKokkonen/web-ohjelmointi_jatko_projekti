@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from "./LoginModal";
 import "./css/Navbar.css";
 import Backdrop from "./Backdrop";
 import useToken from "../hooks/UseToken";

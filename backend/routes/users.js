@@ -17,6 +17,5 @@ module.exports = router;
 //router.post("/editProfile", userControllers.editProfile);
 //router.post("/addNewProducts", userControllers.addProducts);
 //router.post("/addOrder", userControllers.addOrder);
-//router.get("/getShoppingCart", userControllers.getShoppingCart);
 //router.post("/authenticateUser", userControllers.authenticateUser);
 

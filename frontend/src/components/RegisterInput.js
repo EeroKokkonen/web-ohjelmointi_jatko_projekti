@@ -49,16 +49,16 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         }
     }
 
-    return <div className="registerInputContainer">
+    return <form onSubmit={handleSubmit} className="registerInputContainer">
         <p className="errorText">{errorText}</p>
         <Input label={"Etunimi"} ref={firstnameRef} value={userProfile.firstname}/>
         <Input label={"Sukunimi"} ref={lastnameRef}/>
         <Input label={"Osoite"} ref={addressRef}/>
         <Input label={"Sähköposti"} ref={emailRef} type={"email"}/>
         <Input label={"Salasana"} type={"password"} ref={passwordRef}/>
-        <button className="btn" onClick={handleSubmit}>{buttonText}</button>
+        <button className="btn" type="submit">{buttonText}</button>
         <button className="btn" onClick={() => {navigate(-1)}}>Peruuta</button>
-    </div>
+    </form>
 
 
 

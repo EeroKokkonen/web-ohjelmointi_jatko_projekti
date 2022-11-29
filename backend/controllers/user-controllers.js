@@ -5,15 +5,9 @@ const createNewUser = async (req, res) => {
     try{
         // Parsii käyttäjän tiedot api pyynnöstä
         const {firstname, lastname, address, email, password} = req.body;
-        const today = new Date();
-        const shoppingCart = [{
-            foodName: "",
-            foodPrice: ""
-        }];
-        const orderHistory = [{
-            foodName: "",
-            foodPrice: ""
-        }];
+        const date = new Date();
+        const shoppingCart = [];
+        const orderHistory = [];
         // Luo uuden käyttäjä objektin frontendistä tulevien tietojen avulla
         const newUser = {
             email,
@@ -23,7 +17,7 @@ const createNewUser = async (req, res) => {
             address,
             shoppingCart,
             orderHistory,
-            today,
+            date,
         };
         // Etsii tietokannasta käyttäjä collectionin
         const userRef = server.db.collection('users').doc(email);

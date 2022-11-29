@@ -4,9 +4,36 @@ const server = require("../server.js")
 const addProductToShoppingCart = async(req, res) => {
     try {
         const { email, product } = req.body;
-        const response = await server.db.collection("users").doc(email).update({shoppingCart: FieldValue.arrayUnion(product)});
+
+        const userRef = server.db.collection('users').doc(email);
+        const doc = await userRef.get();
+
+        const shoppingCart = doc.data().shoppingCart;
+        shoppingCart.push(product);
+
+        const response = await userRef.update({
+            shoppingCart: shoppingCart
+        });
+
         res.status(200).send(response.id);
     } catch(err) {
+        res.status(400).send(err);
+    }
+};
+
+const getShoppingCart = async(req, res) => {
+    try{
+        const { email, product } = req.body;
+
+        // Etsii ostoskorin tietokannasta
+        const cartRef = server.db.collection('users').doc(email);
+        const doc = await menuRef.get();
+        // Tarkastaa löytyykö sitä tietokannasta
+        if (!doc.exists)
+            return res.status(404).send(err);
+
+        res.json(doc.data().shoppingCart);
+    } catch(err){
         res.status(400).send(err);
     }
 };
@@ -40,3 +67,4 @@ const deleteProductFromShoppingCart = async(req, res) => {
 exports.addProductToShoppingCart = addProductToShoppingCart;
 exports.deleteProductFromShoppingCart = deleteProductFromShoppingCart;
 exports.getMenu = getMenu;
+exports.getShoppingCart = getShoppingCart
