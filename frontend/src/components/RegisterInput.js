@@ -1,6 +1,8 @@
 import Input from "./Input"
 import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+
 
 
 
@@ -14,6 +16,7 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
             password:"",
         }
     }
+    const navigate = useNavigate();
     const firstnameRef = useRef();
     const lastnameRef = useRef();
     const addressRef = useRef();
@@ -38,7 +41,12 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
             password:passwordRef.current.value,
         }
         // Lähettää objektin backendiin, jotta sen voi tallentaa databaseen
-        const response = await axios.post(apiUrl, user);        
+        try{
+            const response = await axios.post(apiUrl, user);
+            navigate("/");
+        } catch(err){
+            setErrorText("Käyttäjän luonti epäonnistui. Yritä myöhemmin uudestaan.");
+        }
     }
 
     return <div className="registerInputContainer">
@@ -49,7 +57,7 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         <Input label={"Sähköposti"} ref={emailRef} type={"email"}/>
         <Input label={"Salasana"} type={"password"} ref={passwordRef}/>
         <button className="btn" onClick={handleSubmit}>{buttonText}</button>
-        <button className="btn" onClick={console.log("Peruutus")}>Peruuta</button>
+        <button className="btn" onClick={() => {navigate(-1)}}>Peruuta</button>
     </div>
 
 
