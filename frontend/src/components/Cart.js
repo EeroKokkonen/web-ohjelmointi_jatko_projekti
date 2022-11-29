@@ -10,7 +10,7 @@ const Cart = () => {
     //Suoritetaan sivunlatauksessa
     const fetchMenu = async () => {
         //Haetaan backendistä data
-        const response = await axios.get("api/products/getShoppingCart");
+        const response = await axios.get("api/products/getShoppingCart/" + token);
         const fetchedFoods = [];
         console.log(response);
         //Muunnetaan data array muotoon ja määritetään foodItemsin sisältö

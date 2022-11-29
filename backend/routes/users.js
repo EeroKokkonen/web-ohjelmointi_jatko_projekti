@@ -5,7 +5,7 @@ const router = express.Router();
 // Asettaa jatkopolut ja niiden funktiot
 router.post("/register", userControllers.createNewUser);
 router.post("/login", userControllers.login);
-router.get("/getProfile/:uid", userControllers.getProfile);
+router.get("/getProfile/:email", userControllers.getProfile);
 
 module.exports = router;
 
