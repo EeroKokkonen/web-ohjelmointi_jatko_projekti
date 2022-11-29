@@ -1,4 +1,4 @@
-
+import Cart from "../components/Cart";
 
 const CartPage = () =>{
 
@@ -6,6 +6,7 @@ const CartPage = () =>{
     return(
         <div>
             <h2 className="PageHeader">Ostoskori</h2>
+            <Cart />
         </div>
     );
 };
