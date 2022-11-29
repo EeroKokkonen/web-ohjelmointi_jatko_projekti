@@ -43,6 +43,7 @@ const createNewUser = async (req, res) => {
 
 const getProfile = async (req, res) => {
     try {
+        console.log("Täällä")
         // Parsii uid:n 
         const uid = req.params.email;
         console.log(uid);

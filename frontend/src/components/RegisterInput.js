@@ -7,21 +7,29 @@ import {useNavigate} from 'react-router-dom';
 
 
 const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
-    if(userProfile == null){
-        userProfile = {
-            firstname: "",
-            lastname: "",
-            address:"",
-            email:"",
-            password:"",
-        }
-    }
+
     const navigate = useNavigate();
     const firstnameRef = useRef();
     const lastnameRef = useRef();
     const addressRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
+
+    let isProfile = false;
+    
+    if(userProfile){
+        isProfile = true;
+    } else{
+        console.log("Else")
+        userProfile = {
+            firstname: "",
+            lastname: "",
+            address: "",
+            email: "",
+            password: ""
+        };
+    }
+    
 
     const [errorText, setErrorText] = useState("");
     const [error, setError] = useState(false);
@@ -49,13 +57,13 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         }
     }
 
-    return <form onSubmit={handleSubmit} className="registerInputContainer">
+    return <form onSubmit={handleSubmit} className="registerInputContainer" >
         <p className="errorText">{errorText}</p>
         <Input label={"Etunimi"} ref={firstnameRef} value={userProfile.firstname}/>
-        <Input label={"Sukunimi"} ref={lastnameRef}/>
-        <Input label={"Osoite"} ref={addressRef}/>
-        <Input label={"Sähköposti"} ref={emailRef} type={"email"}/>
-        <Input label={"Salasana"} type={"password"} ref={passwordRef}/>
+        <Input label={"Sukunimi"} ref={lastnameRef} value={userProfile.lastname}/>
+        <Input label={"Osoite"} ref={addressRef} value={userProfile.address}/>
+        <Input label={"Sähköposti"} ref={emailRef} value={userProfile.email} type={"email"} disabled={isProfile}/>
+        <Input label={"Salasana"} type={"password"} value={userProfile.password} ref={passwordRef}/>
         <button className="btn" type="submit">{buttonText}</button>
         <button className="btn" onClick={() => {navigate(-1)}}>Peruuta</button>
     </form>

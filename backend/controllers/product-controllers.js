@@ -24,18 +24,13 @@ const addProductToShoppingCart = async(req, res) => {
 const getShoppingCart = async(req, res) => {
     try{
         const email = req.params.email;
-        console.log("Täällä")
         // Etsii ostoskorin tietokannasta
         const cartRef = server.db.collection('users').doc(email);
-        console.log("Täällä2")
         const doc = await cartRef.get();
-        console.log("Täällä3")
         // Tarkastaa löytyykö sitä tietokannasta
         if (!doc.exists)
             return res.status(404).send(err);
-        console.log("Täällä4")
         res.json(doc.data().shoppingCart);
-        console.log("Täällä5")
     } catch(err){
         res.status(400).send(err);
     }
