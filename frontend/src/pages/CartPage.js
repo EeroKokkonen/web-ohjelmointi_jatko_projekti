@@ -1,4 +1,5 @@
 import Cart from "../components/Cart";
+import "./css/CartPage.css";
 
 const CartPage = () =>{
 
@@ -7,6 +8,7 @@ const CartPage = () =>{
         <div>
             <h2 className="PageHeader">Ostoskori</h2>
             <Cart />
+            <button className="checkInButton">Kassalle</button>
         </div>
     );
 };

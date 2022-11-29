@@ -60,3 +60,40 @@
   background-color: #ea911c;
 }
 
+.deleteButton {
+  align-items: center;
+  appearance: button;
+  background-color: #c52121;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: "RM Neue",sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  float: right;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.deleteButton:active {
+  background-color: #f95b4f;
+}
+
+.deleteButton:hover {
+  background-color: #f95b4f;
+}

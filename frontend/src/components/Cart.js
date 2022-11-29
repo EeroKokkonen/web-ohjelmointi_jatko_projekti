@@ -33,7 +33,7 @@ const Cart = () => {
     let listFoods = foodItems.map((food) =>
         <div className="food" key={food.name}>
             <h2>{food.name}</h2>
-            <button type="button" className="cartButton" onClick={() => addToCart(food)}>Poista</button>
+            <button type="button" className="deleteButton" onClick={() => addToCart(food)}>Poista</button>
             <p className="price">{food.price} €</p> 
         </div>
     );
