@@ -8,13 +8,17 @@ const addProductToShoppingCart = async(req, res) => {
         const userRef = server.db.collection('users').doc(email);
         const doc = await userRef.get();
         if (!doc.exists){
-            
+            res.status(400).send("Käyttäjää ei löytynyt.");
+            return
         }
-        const shoppingCart = doc.data().shoppingCart;
-        shoppingCart.push(product);
+        const shoppingCartRef = doc.data().shoppingCart;
+        console.log(shoppingCartRef);
+        product.id = shoppingCartRef[shoppingCartRef.length - 1 ].id + 1;
 
+        shoppingCartRef.push(product);
+        console.log(shoppingCartRef);
         const response = await userRef.update({
-            shoppingCart: shoppingCart
+            shoppingCart: shoppingCartRef
         });
 
         res.status(200).send(response.id);
@@ -56,7 +60,8 @@ const getMenu = async(req, res) => {
 
 const deleteProductFromShoppingCart = async(req, res) => {
     try{
-        const{id} = req.body;
+        const productId = req.params.productId;
+        const email = req.params.email;
         const response = await server.db.collection("users").doc(email).update({shoppingCart: FieldValue.arrayUnion(id)});
     } catch(err){
         res.status(400).send(err);
