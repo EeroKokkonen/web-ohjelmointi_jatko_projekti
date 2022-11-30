@@ -100,7 +100,15 @@ const orderShoppingCart = async(req,res) => {
         const shoppingCart = doc.data().shoppingCart;
         const orderHistory = doc.data().orderHistory;
 
-        const date = new Date();
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        const hours = today.getHours();
+        const minutes = today.getMinutes();
+
+        date = hours + "." + minutes + " " + dd + '/' + mm + '/' + yyyy;
+
         orderHistory.push({
             date: date,
             productOrder: shoppingCart,
@@ -121,10 +129,9 @@ const orderShoppingCart = async(req,res) => {
 const getOrders = async(req, res) => {
     try{
         const email = req.query.email;
-        console.log(email)
         const userRef = server.db.collection("users").doc(email);
         const doc = await userRef.get();
-        const orderHistory = doc.data().orderHistory[0];
+        const orderHistory = doc.data().orderHistory;
         console.log(orderHistory);
         res.status(200).send(orderHistory);
     } catch (err) {

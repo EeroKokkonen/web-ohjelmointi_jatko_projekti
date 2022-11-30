@@ -40,7 +40,7 @@ const OrderList = () => {
         //Haetaan backendistä data
         const response = await axios.get("api/products/getOrders?email=" + token);
         setOrderList(response.data);
-        console.log(orderList)
+        console.log(response.data)
     }
 
     useEffect(() => {
@@ -58,10 +58,11 @@ const OrderList = () => {
     }
 
     let listOfOrderedFoods = orderList.map((order) =>
-        <div className="OrderContainer">
+        <div className="OrderContainer" key={order.date}>
             <h1>Tilattu: <p className="date">{order.date}</p></h1>
+            
                 {order.productOrder.map((product) =>
-                    <p className="productName">{product.name}</p> 
+                    <p className="productName" key={product.id}>{product.name}</p> 
                 )}
                 <p className="sumLabel">Tilauksen summa: </p>
                 <p className="priceSum">{priceCounter(order)} €</p>
