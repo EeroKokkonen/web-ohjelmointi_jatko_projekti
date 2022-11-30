@@ -32,18 +32,17 @@ const createNewUser = async (req, res) => {
             return;
         }
         else {
-            res.status(400).send("Email already exists");
+            res.status(400).send("Sähköposti on jo käytössä");
         }
         
     } catch (error) {
-        res.status(400).send(`Invalid inputs`);
+        res.status(400).send(`Käyttäjän luonti epäonnistui. Yritä myöhemmin uudestaan.`);
         console.log("Virhe käyttäjän luonnissa..");
     }
 };
 
 const getProfile = async (req, res) => {
     try {
-        console.log("Täällä")
         // Parsii uid:n 
         const uid = req.params.email;
         console.log(uid);
@@ -83,6 +82,32 @@ const login = async(req, res) => {
     }
 };
 
+const updateProfile = async(req, res) => {
+    try {
+        const { email, password, firstname, lastname, address } = req.body;
+
+        const userRef = server.db.collection('users').doc(email);
+        const doc = await userRef.get();
+
+        if(!doc.exists){
+            res.status(400).send("Käyttäjää ei löytynyt.");
+            return;
+        }
+
+        const response = await userRef.update({
+            firstname: firstname,
+            lastname: lastname,
+            address: address,
+            password: password,
+        });
+        res.status(200).send("Käyttäjän tiedot tallennettu onnistuneesti!");
+    } catch(err) {
+        res.status(400).send("Käyttäjän päivittäminen epäonnistui. Yritä myöhemmin uudelleen");
+        console.log("Virhe")
+    }
+};
+
+exports.updateProfile = updateProfile;
 exports.login = login;
 exports.createNewUser = createNewUser;
 exports.getProfile = getProfile;

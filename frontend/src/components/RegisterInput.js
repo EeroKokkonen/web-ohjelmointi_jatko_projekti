@@ -1,4 +1,5 @@
 import Input from "./Input"
+import "./css/RegisterInput.css"
 import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
@@ -20,7 +21,6 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
     if(userProfile){
         isProfile = true;
     } else{
-        console.log("Else")
         userProfile = {
             firstname: "",
             lastname: "",
@@ -32,6 +32,7 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
     
 
     const [errorText, setErrorText] = useState("");
+    const [confirmText, setConfirmText] = useState("");
     const [error, setError] = useState(false);
 
     const handleSubmit = async (e) => {
@@ -49,16 +50,22 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
             password:passwordRef.current.value,
         }
         // Lähettää objektin backendiin, jotta sen voi tallentaa databaseen
+        let response;
         try{
-            const response = await axios.post(apiUrl, user);
-            navigate("/");
+            response = await axios.post(apiUrl, user);
+            setConfirmText(response.data);
+            if(!isProfile)
+                navigate("/");
         } catch(err){
-            setErrorText("Käyttäjän luonti epäonnistui. Yritä myöhemmin uudestaan.");
+            setErrorText(response.data);
         }
+        
+        console.log(response)
     }
 
     return <form onSubmit={handleSubmit} className="registerInputContainer" >
         <p className="errorText">{errorText}</p>
+        <p className="confirmText">{confirmText}</p>
         <Input label={"Etunimi"} ref={firstnameRef} value={userProfile.firstname}/>
         <Input label={"Sukunimi"} ref={lastnameRef} value={userProfile.lastname}/>
         <Input label={"Osoite"} ref={addressRef} value={userProfile.address}/>
@@ -67,9 +74,6 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         <button className="btn" type="submit">{buttonText}</button>
         <button className="btn" onClick={() => {navigate(-1)}}>Peruuta</button>
     </form>
-
-
-
 
 
     function checkError(){

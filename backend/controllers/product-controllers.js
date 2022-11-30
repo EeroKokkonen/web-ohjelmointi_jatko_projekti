@@ -7,7 +7,9 @@ const addProductToShoppingCart = async(req, res) => {
 
         const userRef = server.db.collection('users').doc(email);
         const doc = await userRef.get();
-
+        if (!doc.exists){
+            
+        }
         const shoppingCart = doc.data().shoppingCart;
         shoppingCart.push(product);
 

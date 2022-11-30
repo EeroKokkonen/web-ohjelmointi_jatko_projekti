@@ -26,7 +26,7 @@ const Cart = (props) => {
 
         for (const key in fetchedFoods) {
             sum += fetchedFoods[key].price;
-          }
+        }
         
         setPriceSum(sum);
         setFoodItems(fetchedFoods);
@@ -40,18 +40,15 @@ const Cart = (props) => {
     let listFoods = foodItems.map((food) =>
         <div className="food" key={food.name}>
             <h2>{food.name}</h2>
-            <button type="button" className="deleteButton" onClick={() => addToCart(food)}>Poista</button>
+            <button type="button" className="deleteButton" onClick={() => deleteFromCart(food)}>Poista</button>
             <p className="price">{food.price} €</p> 
         </div>
     );
 
-    let addToCart = async (food) => {
+    const deleteFromCart = async (food) => {
         
         try{
-            const response = await axios.post("api/products/addProductToShoppingCard", {
-                product: food,
-                email: token,
-            });
+            const response = await axios.delete("api/products/deleteFromShoppingCard?" + token + "&" + food.id);
             alert("Tuote lisätty ostoskoriin!");
         } catch (err){
             console.log("Virhe: " + err);
