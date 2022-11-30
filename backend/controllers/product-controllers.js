@@ -124,7 +124,7 @@ const getOrders = async(req, res) => {
         const userRef = server.db.collection("users").doc(email);
         const doc = await userRef.get();
         const orderHistory = doc.data().orderHistory;
-
+        console.log(orderHistory);
         res.status(200).send(orderHistory);
     } catch (err) {
         res.status(400).send("Tilauksia ei löytynyt. Yritä myöhemmin uudelleen");
