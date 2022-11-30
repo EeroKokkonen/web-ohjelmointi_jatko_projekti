@@ -121,9 +121,10 @@ const orderShoppingCart = async(req,res) => {
 const getOrders = async(req, res) => {
     try{
         const email = req.query.email;
+        console.log(email)
         const userRef = server.db.collection("users").doc(email);
         const doc = await userRef.get();
-        const orderHistory = doc.data().orderHistory;
+        const orderHistory = doc.data().orderHistory[0];
         console.log(orderHistory);
         res.status(200).send(orderHistory);
     } catch (err) {
