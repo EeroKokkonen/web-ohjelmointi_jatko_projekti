@@ -24,3 +24,11 @@
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+
+.checkInButton:active {
+  background-color: #faa12c;
+}
+
+.checkInButton:hover {
+  background-color: #ea911c;
+}

@@ -2,9 +2,10 @@
     margin: 10px;
     width: 60%;
     min-width: 500px;
+    max-width: 500px;
     margin: 0 auto;
     margin-bottom: 10px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     padding: 5px;
 }
@@ -109,10 +110,10 @@
 .sumBack {
     margin: 10px;
     width: 150px;
-    min-width: 500px;
+    min-width: 250px;
     margin: 0 auto;
     margin-bottom: 10px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     padding: 5px;
 }

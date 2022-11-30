@@ -6,34 +6,6 @@ import useToken from "../hooks/UseToken";
 const OrderList = () => {
     const [orderList, setOrderList] = useState([]);
     const {token, setToken} = useToken("");
-    /*let foodsTest = [
-        {
-            date: "11.11.2000",
-            productOrder: [
-                {
-                    name: "purilainen",
-                    price: 3,
-                },
-                {
-                    name: "hodari",
-                    price: 5,
-                },
-            ]
-        },
-        {
-            date: "12.12.2021",
-            productOrder: [
-                {
-                    name: "lihis",
-                    price: 6
-                },
-                {
-                    name: "hodari",
-                    price: 5
-                },
-            ]
-        }
-    ];*/
 
     //Suoritetaan sivunlatauksessa
     const fetchOrders = async () => {

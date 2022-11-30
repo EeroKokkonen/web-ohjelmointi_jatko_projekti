@@ -12,7 +12,7 @@ const CartPage = () =>{
             console.log(token)
             response = await axios.get("api/products/orderShoppingCart?email=" + token);
             console.log(response.data);
-            
+            window.location.reload();
         } catch (err){
             console.log(response.data);
         }

@@ -13,11 +13,7 @@ const MainPage = () => {
             <p>Su 10:00-19:00</p>
           </div>
         </div>
-        
-      
-      
-    );
-    
+    ); 
 };
 
 export default MainPage;
