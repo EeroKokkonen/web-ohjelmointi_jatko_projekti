@@ -38,7 +38,6 @@ const Cart = (props) => {
 
     //mapataan array muuttujaan
     let listFoods = foodItems.map((food) =>
-        
         <div className="food" key={food.id}>
             <h2>{food.name}</h2>
             <button type="button" className="deleteButton" onClick={() => deleteFromCart(food)}>Poista</button>

@@ -1,6 +1,12 @@
+import OrderList from "../components/OrderList";
+
 const OrdersPage = () => {
     return(
-        <h2 className="PageHeader">Tilaushistoria</h2>
+        <di>
+            <h2 className="PageHeader">Tilaushistoria</h2>
+            <OrderList />
+        </di>
+        
     );
 };
 
