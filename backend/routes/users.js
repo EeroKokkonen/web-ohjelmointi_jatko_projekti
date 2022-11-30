@@ -6,6 +6,7 @@ const router = express.Router();
 router.post("/register", userControllers.createNewUser);
 router.post("/login", userControllers.login);
 router.get("/getProfile/:email", userControllers.getProfile);
+router.post("/updateProfile", userControllers.updateProfile);
 
 module.exports = router;
 
@@ -14,7 +15,7 @@ module.exports = router;
 
 
 
-//router.post("/editProfile", userControllers.editProfile);
+
 //router.post("/addNewProducts", userControllers.addProducts);
 //router.post("/addOrder", userControllers.addOrder);
 //router.post("/authenticateUser", userControllers.authenticateUser);

@@ -26,7 +26,7 @@ function App() {
           <Route path="/orders" element={ <OrdersPage /> } />
           <Route path="/profile" element={ <ProfilePage /> } />
           <Route path="/cart" element={ <CartPage /> } />
-          <Route path="/register" element={ <RegisterPage /> } />
+          <Route path="*" element={<Navigate to="/" replace />}/>
         </Routes>
       </div>
     );

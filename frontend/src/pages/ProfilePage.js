@@ -3,10 +3,12 @@ import "./css/ProfilePage.css"
 import { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import useToken from "../hooks/UseToken";
+import {useNavigate} from 'react-router-dom';
 
 const ProfilePage = () => {
     const {token, setToken} = useToken("");
     const [userProfile, setUserProfile] = useState({});
+    const navigate = useNavigate();
 
     const fetchProfile = async () => {
         try{
@@ -36,11 +38,11 @@ const ProfilePage = () => {
                 <h2>Profiili</h2>
                 <div className="profileRight">
                     <h3>Muokkaa profiilia</h3>
-                    <RegisterInput buttonText={"Tallenna"} userProfile={userProfile}/>
+                    <RegisterInput buttonText={"Tallenna"} userProfile={userProfile} apiUrl={"api/users/updateProfile"}/>
                 </div>
                 <div className="profileLeft">
-                    <button className="orderButton">Tilaukset</button>
-                    <button className="orderButton">Ostoskori</button>
+                    <button className="orderButton" onClick={() => {navigate("/orders")}}>Tilaukset</button>
+                    <button className="orderButton" onClick={() => {navigate("/cart")}}>Ostoskori</button>
                 </div>
             </div>
         </>
