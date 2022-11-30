@@ -6,8 +6,10 @@ const router = express.Router();
 // Asettaa jatkopolut ja niiden funktiot
 router.get("/getMenu", productControllers.getMenu);
 router.post("/addProductToShoppingCard", productControllers.addProductToShoppingCart);
-router.delete("/deleteProductFromShoppingCard", productControllers.deleteProductFromShoppingCart);
+router.delete("/deleteProductFromShoppingCart", productControllers.deleteProductFromShoppingCart);
 router.get("/getShoppingCart/:email", productControllers.getShoppingCart);
+router.get("/orderShoppingCart", productControllers.orderShoppingCart);
+router.get("/getOrders", productControllers.getOrders);
 
 
 module.exports = router;

@@ -46,16 +46,21 @@ const Cart = (props) => {
     );
 
     const deleteFromCart = async (food) => {
-        
+        let response;
         try{
-            const response = await axios.delete("api/products/deleteFromShoppingCart?email=" + token + "&productId=" + food.id);
-            alert("Tuote lisätty ostoskoriin!");
+            response = await axios.delete("api/products/deleteProductFromShoppingCart?email=" + token + "&productId=" + food.id);
+            console.log(response.data);
+            alert("Tuote poistettu ostoskortista!");
+            window.location.reload();
+            
         } catch (err){
-            console.log("Virhe: " + err);
-            alert("Tuotetta ei voitu lisätä ostoskortiin.\n Yritä myöhemmin uudelleen");
+            console.log(response.data);
+            alert("Tuotetta ei voitu poistaa ostoskorista.\n Yritä myöhemmin uudelleen");
         }
         
     };
+
+    
 
     return(
         <div>

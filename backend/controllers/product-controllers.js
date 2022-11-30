@@ -6,19 +6,21 @@ const addProductToShoppingCart = async(req, res) => {
         const { email, product } = req.body;
 
         const userRef = server.db.collection('users').doc(email);
+        console.log(email)
         const doc = await userRef.get();
         if (!doc.exists){
             res.status(400).send("Käyttäjää ei löytynyt.");
             return
         }
-        const shoppingCartRef = doc.data().shoppingCart;
-        console.log(shoppingCartRef);
-        product.id = shoppingCartRef[shoppingCartRef.length - 1 ].id + 1;
+        const shoppingCart = doc.data().shoppingCart;
+        if(shoppingCart.length > 0)
+            product.id = shoppingCart[shoppingCart.length - 1 ].id + 1;
+        else
+            product.id = 0;
 
-        shoppingCartRef.push(product);
-        console.log(shoppingCartRef);
+        shoppingCart.push(product);
         const response = await userRef.update({
-            shoppingCart: shoppingCartRef
+            shoppingCart: shoppingCart
         });
 
         res.status(200).send(response.id);
@@ -60,17 +62,77 @@ const getMenu = async(req, res) => {
 
 const deleteProductFromShoppingCart = async(req, res) => {
     try{
-        const productId = req.params.productId;
-        const email = req.params.email;
+        const productId = req.query.productId;
+        const email = req.query.email;
+
         const userRef = server.db.collection("users").doc(email);
-        const response = await userRef.update({shoppingCart: FieldValue.arrayUnion(id)});
+        const doc = await userRef.get();
+        const shoppingCart = doc.data().shoppingCart;
+
+        let productFound = false;
+        for (let i = 0; i < shoppingCart.length; i++){
+            console.log(shoppingCart[i].id + "=" + productId)
+            if (shoppingCart[i].id == productId) {
+                console.log(shoppingCart);
+                shoppingCart.splice(i, 1);
+                console.log(shoppingCart);
+                productFound = true;
+            }
+        }
+
+        if(!productFound){
+            return res.status(400).send("Tuotetta ei löytynyt ostoskorista.");
+        }
+
+        const response = await userRef.update({shoppingCart: shoppingCart});
+
+        res.status(200).send("Tuote poistettu ostoskorista!");
     } catch(err){
         res.status(400).send(err);
     }
 };
 
+const orderShoppingCart = async(req,res) => {
+    try{
+        const email = req.query.email;
+        const userRef = server.db.collection("users").doc(email);
+        const doc = await userRef.get();
+        const shoppingCart = doc.data().shoppingCart;
+        const orderHistory = doc.data().orderHistory;
+
+        const date = new Date();
+        orderHistory.push({
+            date: date,
+            productOrder: shoppingCart,
+        });
+
+        const response = await userRef.update({
+            shoppingCart: [],
+            orderHistory: orderHistory
+        });
+        res.status(200).send("Tuotteet tilattu!");
 
 
+    } catch (err) {
+        res.status(400).send("Virhe");
+    }
+};
+
+const getOrders = async(req, res) => {
+    try{
+        const email = req.query.email;
+        const userRef = server.db.collection("users").doc(email);
+        const doc = await userRef.get();
+        const orderHistory = doc.data().orderHistory;
+
+        res.status(200).send(orderHistory);
+    } catch (err) {
+        res.status(400).send("Tilauksia ei löytynyt. Yritä myöhemmin uudelleen");
+    }
+}
+
+exports.getOrders = getOrders;
+exports.orderShoppingCart = orderShoppingCart;
 exports.addProductToShoppingCart = addProductToShoppingCart;
 exports.deleteProductFromShoppingCart = deleteProductFromShoppingCart;
 exports.getMenu = getMenu;
