@@ -48,7 +48,7 @@ const Cart = (props) => {
     const deleteFromCart = async (food) => {
         
         try{
-            const response = await axios.delete("api/products/deleteFromShoppingCard?" + token + "&" + food.id);
+            const response = await axios.delete("api/products/deleteFromShoppingCart?email=" + token + "&productId=" + food.id);
             alert("Tuote lisätty ostoskoriin!");
         } catch (err){
             console.log("Virhe: " + err);

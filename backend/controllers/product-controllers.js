@@ -62,7 +62,8 @@ const deleteProductFromShoppingCart = async(req, res) => {
     try{
         const productId = req.params.productId;
         const email = req.params.email;
-        const response = await server.db.collection("users").doc(email).update({shoppingCart: FieldValue.arrayUnion(id)});
+        const userRef = server.db.collection("users").doc(email);
+        const response = await userRef.update({shoppingCart: FieldValue.arrayUnion(id)});
     } catch(err){
         res.status(400).send(err);
     }
