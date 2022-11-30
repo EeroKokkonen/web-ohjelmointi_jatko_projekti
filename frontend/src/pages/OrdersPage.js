@@ -2,10 +2,10 @@ import OrderList from "../components/OrderList";
 
 const OrdersPage = () => {
     return(
-        <di>
+        <div>
             <h2 className="PageHeader">Tilaushistoria</h2>
             <OrderList />
-        </di>
+        </div>
         
     );
 };
