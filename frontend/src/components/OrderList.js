@@ -4,9 +4,9 @@ import axios from "axios";
 import useToken from "../hooks/UseToken";
 
 const OrderList = () => {
-    const [foodItems, setFoodItems] = useState([]);
+    const [orderList, setOrderList] = useState([]);
     const {token, setToken} = useToken("");
-    const foodsTest = [
+    /*let foodsTest = [
         {
             date: "11.11.2000",
             productOrder: [
@@ -33,28 +33,18 @@ const OrderList = () => {
                 },
             ]
         }
-    ];
+    ];*/
 
     //Suoritetaan sivunlatauksessa
-    const fetchMenu = async () => {
+    const fetchOrders = async () => {
         //Haetaan backendistä data
-        const response = await axios.get("api/products/getMenu");
-        const fetchedFoods = [];
-
-        //Muunnetaan data array muotoon ja määritetään foodItemsin sisältö
-        for (const key in response.data){
-            fetchedFoods.push({
-                id: key,
-                name: response.data[key].name,
-                price: response.data[key].price,
-            });
-        }
-        setFoodItems(fetchedFoods);
-        console.log(fetchedFoods);
+        const response = await axios.get("api/products/getOrders?email=" + token);
+        setOrderList(response.data);
+        console.log(orderList)
     }
 
     useEffect(() => {
-        fetchMenu();
+        fetchOrders();
     }, [])
 
     const priceCounter = (order) =>{
@@ -67,7 +57,7 @@ const OrderList = () => {
         )
     }
 
-    let listOfOrderedFoods = foodsTest.map((order) =>
+    let listOfOrderedFoods = orderList.map((order) =>
         <div className="OrderContainer">
             <h1>Tilattu: <p className="date">{order.date}</p></h1>
                 {order.productOrder.map((product) =>
