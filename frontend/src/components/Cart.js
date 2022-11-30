@@ -38,25 +38,17 @@ const Cart = (props) => {
 
     //mapataan array muuttujaan
     let listFoods = foodItems.map((food) =>
-        <div className="food" key={food.name}>
+        
+        <div className="food" key={food.id}>
             <h2>{food.name}</h2>
-            <button type="button" className="deleteButton" onClick={() => addToCart(food)}>Poista</button>
+            <button type="button" className="deleteButton" onClick={() => deleteFood(food.id)}>Poista</button>
             <p className="price">{food.price} €</p> 
         </div>
     );
 
-    let addToCart = async (food) => {
+    let deleteFood = async (food) => {
         
-        try{
-            const response = await axios.post("api/products/addProductToShoppingCard", {
-                product: food,
-                email: token,
-            });
-            alert("Tuote lisätty ostoskoriin!");
-        } catch (err){
-            console.log("Virhe: " + err);
-            alert("Tuotetta ei voitu lisätä ostoskortiin.\n Yritä myöhemmin uudelleen");
-        }
+        
         
     };
 
