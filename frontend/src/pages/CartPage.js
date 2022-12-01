@@ -2,16 +2,22 @@ import Cart from "../components/Cart";
 import "./css/CartPage.css";
 import axios from "axios";
 import useToken from "../hooks/UseToken";
+import {useState} from "react"
 
 const CartPage = () =>{
     const {token} = useToken("");
+    const [emptyCart, setEmptyCart] = useState(false);
 
     const orderCart = async () => {
         let response;
+        if(emptyCart){
+            alert("Ostoskorisi on tyhjä!");
+            return;
+        }
+        
         try{
-            console.log(token)
             response = await axios.get("api/products/orderShoppingCart?email=" + token);
-            console.log(response.data);
+            
             window.location.reload();
         } catch (err){
             console.log(response.data);
@@ -21,7 +27,7 @@ const CartPage = () =>{
     return(
         <div>
             <h2 className="PageHeader">Ostoskori</h2>
-            <Cart />
+            <Cart setEmptyCart={setEmptyCart}/>
             <button className="checkInButton" onClick={orderCart}>Kassalle</button>
         </div>
     );

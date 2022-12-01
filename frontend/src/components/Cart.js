@@ -5,7 +5,7 @@ import useToken from "../hooks/UseToken";
 
 const Cart = (props) => {
     const [foodItems, setFoodItems] = useState([]);
-    const {token, setToken} = useToken("");
+    const {token} = useToken("");
     const [priceSum, setPriceSum] = useState(0);
 
     //Suoritetaan sivunlatauksessa
@@ -13,8 +13,11 @@ const Cart = (props) => {
         let sum = 0;
         //Haetaan backendistä data
         const response = await axios.get("api/products/getShoppingCart/" + token);
+
+        if (response.data.length === 0){
+            props.setEmptyCart(true);
+        }
         const fetchedFoods = [];
-        console.log(response);
         //Muunnetaan data array muotoon ja määritetään foodItemsin sisältö
         for (const key in response.data){
             fetchedFoods.push({
