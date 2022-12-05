@@ -5,7 +5,7 @@ import useToken from "../hooks/UseToken";
 
 const OrderList = () => {
     const [orderList, setOrderList] = useState([]);
-    const {token, setToken} = useToken("");
+    const {token} = useToken("");
 
     //Suoritetaan sivunlatauksessa
     const fetchOrders = async () => {

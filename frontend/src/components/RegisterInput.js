@@ -4,9 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
-
-
-
 const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
 
     const navigate = useNavigate();
@@ -30,7 +27,6 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         };
     }
     
-
     const [errorText, setErrorText] = useState("");
     const [confirmText, setConfirmText] = useState("");
     const [error, setError] = useState(false);
@@ -59,21 +55,21 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         } catch(err){
             setErrorText(response.data);
         }
-        
-        console.log(response)
     }
 
-    return <form onSubmit={handleSubmit} className="registerInputContainer" >
-        <p className="errorText">{errorText}</p>
-        <p className="confirmText">{confirmText}</p>
-        <Input label={"Etunimi"} ref={firstnameRef} value={userProfile.firstname}/>
-        <Input label={"Sukunimi"} ref={lastnameRef} value={userProfile.lastname}/>
-        <Input label={"Osoite"} ref={addressRef} value={userProfile.address}/>
-        <Input label={"Sähköposti"} ref={emailRef} value={userProfile.email} type={"email"} disabled={isProfile}/>
-        <Input label={"Salasana"} type={"password"} value={userProfile.password} ref={passwordRef}/>
-        <button className="btn" type="submit">{buttonText}</button>
-        <button className="btn" onClick={() => {navigate(-1)}}>Peruuta</button>
-    </form>
+    return(
+        <form onSubmit={handleSubmit} className="registerInputContainer" >
+            <p className="errorText">{errorText}</p>
+            <p className="confirmText">{confirmText}</p>
+            <Input label={"Etunimi"} ref={firstnameRef} value={userProfile.firstname}/>
+            <Input label={"Sukunimi"} ref={lastnameRef} value={userProfile.lastname}/>
+            <Input label={"Osoite"} ref={addressRef} value={userProfile.address}/>
+            <Input label={"Sähköposti"} ref={emailRef} value={userProfile.email} type={"email"} disabled={isProfile}/>
+            <Input label={"Salasana"} type={"password"} value={userProfile.password} ref={passwordRef}/>
+            <button className="btn" type="submit">{buttonText}</button>
+            <button className="btn" onClick={() => {navigate(-1)}}>Peruuta</button>
+        </form>
+    )
 
 
     function checkError(){
