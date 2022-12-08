@@ -5,23 +5,28 @@ import useToken from "../hooks/UseToken";
 
 const Foodmenu = () => {
     const [foodItems, setFoodItems] = useState([]);
-    const {token, setToken} = useToken("");
+    const {token} = useToken("");
     //Suoritetaan sivunlatauksessa
     const fetchMenu = async () => {
         //Haetaan backendistä data
-        const response = await axios.get("api/products/getMenu");
-        const fetchedFoods = [];
+        try{
+            const response = await axios.get("https://herkkugrillibackend.eerokokkonen.repl.co/api/products/getMenu");
+            const fetchedFoods = [];
 
-        //Muunnetaan data array muotoon ja määritetään foodItemsin sisältö
-        for (const key in response.data){
-            fetchedFoods.push({
-                id: key,
-                name: response.data[key].name,
-                price: response.data[key].price,
-            });
+            //Muunnetaan data array muotoon ja määritetään foodItemsin sisältö
+            for (const key in response.data){
+                fetchedFoods.push({
+                    id: key,
+                    name: response.data[key].name,
+                    price: response.data[key].price,
+                });
+            }
+            setFoodItems(fetchedFoods);
+            //console.log(response);
+            console.log("HAKU TEHTIIN")
+        } catch (err){
+            console.log(err);
         }
-        setFoodItems(fetchedFoods);
-        console.log(fetchedFoods);
     }
 
     useEffect(() => {
@@ -38,9 +43,12 @@ const Foodmenu = () => {
     );
 
     let addToCart = async (food) => {
-        
+        if(token === null){
+            alert("Kirjaudu sisään!")
+            return
+        }
         try{
-            const response = await axios.post("api/products/addProductToShoppingCard", {
+            const response = await axios.post("https://herkkugrillibackend.eerokokkonen.repl.co/api/products/addProductToShoppingCard", {
                 product: food,
                 email: token,
             });

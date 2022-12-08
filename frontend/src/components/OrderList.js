@@ -10,9 +10,8 @@ const OrderList = () => {
     //Suoritetaan sivunlatauksessa
     const fetchOrders = async () => {
         //Haetaan backendistä data
-        const response = await axios.get("api/products/getOrders?email=" + token);
+        const response = await axios.get("https://herkkugrillibackend.eerokokkonen.repl.co/api/products/getOrders?email=" + token);
         setOrderList(response.data);
-        console.log(response.data)
     }
 
     useEffect(() => {
@@ -24,15 +23,11 @@ const OrderList = () => {
         for (const i in order.productOrder){
             sum += order.productOrder[i].price
         }
-        return(
-            sum
-        )
+        return(sum);
     }
-
     let listOfOrderedFoods = orderList.map((order) =>
         <div className="OrderContainer" key={order.date}>
             <h1>Tilattu: <p className="date">{order.date}</p></h1>
-            
                 {order.productOrder.map((product) =>
                     <p className="productName" key={product.id}>{product.name}</p> 
                 )}

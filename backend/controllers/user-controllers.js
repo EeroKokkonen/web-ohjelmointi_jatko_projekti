@@ -84,16 +84,17 @@ const login = async(req, res) => {
 
 const updateProfile = async(req, res) => {
     try {
+        // Parsii uudet käyttäjäntiedot pyynnöstä
         const { email, password, firstname, lastname, address } = req.body;
-
+        
+        // Etsii käyttäjän tiedot
         const userRef = server.db.collection('users').doc(email);
         const doc = await userRef.get();
-
         if(!doc.exists){
             res.status(400).send("Käyttäjää ei löytynyt.");
             return;
         }
-
+        // Laittaa päivitys pyynnön tietokantaan
         const response = await userRef.update({
             firstname: firstname,
             lastname: lastname,

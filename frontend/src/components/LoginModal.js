@@ -31,7 +31,8 @@ const LoginModal = (props) => {
 
     try {
       // Lähettää sähköpostin ja salasanan backendiin, jos käyttäjä löytyy kirjautuu sisälle
-      const response = await axios.post("api/users/login", user);
+      const response = await axios.post("https://herkkugrillibackend.eerokokkonen.repl.co/api/users/login", user);
+      console.log(response.data);
       const token = response.data;
       setToken(token);
       window.location.reload();

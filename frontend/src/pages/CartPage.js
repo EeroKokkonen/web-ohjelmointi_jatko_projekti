@@ -16,7 +16,7 @@ const CartPage = () =>{
         }
         
         try{
-            response = await axios.get("api/products/orderShoppingCart?email=" + token);
+            response = await axios.get("https://herkkugrillibackend.eerokokkonen.repl.co/api/products/orderShoppingCart?email=" + token);
             
             window.location.reload();
         } catch (err){

@@ -71,7 +71,6 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
         </form>
     )
 
-
     function checkError(){
         // Tarkistaa, jos jokin syötteistä on tyhjänä
         const errorColor = "rgba(255, 0, 30, 0.3)";
@@ -111,10 +110,7 @@ const RegisterInput = ({buttonText, userProfile, apiUrl}) => {
             return false;
         }
         return true;
-}
-    
+}    
 };
-
-
 
 export default RegisterInput;

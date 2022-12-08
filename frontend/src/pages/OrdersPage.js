@@ -6,7 +6,6 @@ const OrdersPage = () => {
             <h2 className="PageHeader">Tilaushistoria</h2>
             <OrderList />
         </div>
-        
     );
 };
 

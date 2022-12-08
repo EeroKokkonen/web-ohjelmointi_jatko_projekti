@@ -3,11 +3,10 @@ import "./css/RegisterPage.css"
 
 const RegisterPage = () => {
 
-
     return <div className="pageContainer">
         <div className="inputContainer">
             <h2>Rekisteröidy</h2>
-            <RegisterInput buttonText={"Rekisteröidy"} apiUrl={"api/users/register"}/>
+            <RegisterInput buttonText={"Rekisteröidy"} apiUrl={"https://herkkugrillibackend.eerokokkonen.repl.co/api/users/register"}/>
         </div>
 
     </div>

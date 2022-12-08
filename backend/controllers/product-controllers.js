@@ -3,21 +3,23 @@ const server = require("../server.js")
 
 const addProductToShoppingCart = async(req, res) => {
     try {
+        // Parsii tiedot pyynnöstä
         const { email, product } = req.body;
-
+        // Etsii käyttäjää tietokannasta
         const userRef = server.db.collection('users').doc(email);
-        console.log(email)
         const doc = await userRef.get();
         if (!doc.exists){
             res.status(400).send("Käyttäjää ei löytynyt.");
             return
         }
+        // Lisää id:n tuotteelle
         const shoppingCart = doc.data().shoppingCart;
         if(shoppingCart.length > 0)
             product.id = shoppingCart[shoppingCart.length - 1 ].id + 1;
         else
             product.id = 0;
 
+        // Lisää tuotteen ostoskoriin ja päivittää sen tietokantaan
         shoppingCart.push(product);
         const response = await userRef.update({
             shoppingCart: shoppingCart
@@ -62,16 +64,17 @@ const getMenu = async(req, res) => {
 
 const deleteProductFromShoppingCart = async(req, res) => {
     try{
+        // Parsii sähköpostin ja poistettavan tuotteen url osoitteesta
         const productId = req.query.productId;
         const email = req.query.email;
-
+        // Etsii käyttäjän tietokannasta
         const userRef = server.db.collection("users").doc(email);
         const doc = await userRef.get();
         const shoppingCart = doc.data().shoppingCart;
 
+        // Etsii datasta poistettavaa tuotetta
         let productFound = false;
         for (let i = 0; i < shoppingCart.length; i++){
-            console.log(shoppingCart[i].id + "=" + productId)
             if (shoppingCart[i].id == productId) {
                 console.log(shoppingCart);
                 shoppingCart.splice(i, 1);
@@ -79,11 +82,12 @@ const deleteProductFromShoppingCart = async(req, res) => {
                 productFound = true;
             }
         }
-
+        // Katsoo löytyikö poistettavaa tuotetta
         if(!productFound){
             return res.status(400).send("Tuotetta ei löytynyt ostoskorista.");
         }
 
+        // Päivittää uuden ostoslistan tietokantaan
         const response = await userRef.update({shoppingCart: shoppingCart});
 
         res.status(200).send("Tuote poistettu ostoskorista!");
@@ -94,12 +98,15 @@ const deleteProductFromShoppingCart = async(req, res) => {
 
 const orderShoppingCart = async(req,res) => {
     try{
+        // Parsii
         const email = req.query.email;
         const userRef = server.db.collection("users").doc(email);
+        // Etsii
         const doc = await userRef.get();
         const shoppingCart = doc.data().shoppingCart;
         const orderHistory = doc.data().orderHistory;
 
+        // Muodostaa ajan tilaukselle
         let today = new Date();
         const dd = String(today.getDate()).padStart(2, '0');
         const mm = String(today.getMonth() + 1).padStart(2, '0');
