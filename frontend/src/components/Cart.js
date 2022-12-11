@@ -30,7 +30,7 @@ const Cart = (props) => {
         for (const key in fetchedFoods) {
             sum += fetchedFoods[key].price;
         }
-        
+
         setPriceSum(sum);
         setFoodItems(fetchedFoods);
     }
@@ -47,7 +47,7 @@ const Cart = (props) => {
             <p className="price">{food.price} €</p> 
         </div>
     );
-
+    
     const deleteFromCart = async (food) => {
         let response;
         try{
