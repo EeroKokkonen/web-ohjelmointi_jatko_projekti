@@ -9,14 +9,3 @@ router.get("/getProfile/:email", userControllers.getProfile);
 router.post("/updateProfile", userControllers.updateProfile);
 
 module.exports = router;
-
-
-
-
-
-
-
-//router.post("/addNewProducts", userControllers.addProducts);
-//router.post("/addOrder", userControllers.addOrder);
-//router.post("/authenticateUser", userControllers.authenticateUser);
-

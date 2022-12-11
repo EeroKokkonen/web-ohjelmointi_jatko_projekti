@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6898b96f.css",
+    "main.js": "/static/js/main.cbe8cd52.js",
+    "static/media/ranskalaisetTausta.jpeg": "/static/media/ranskalaisetTausta.225a783e9be4d0005a34.jpeg",
+    "static/media/homepage.jpeg": "/static/media/homepage.74457594acce426e64f9.jpeg",
+    "index.html": "/index.html",
+    "main.6898b96f.css.map": "/static/css/main.6898b96f.css.map",
+    "main.cbe8cd52.js.map": "/static/js/main.cbe8cd52.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6898b96f.css",
+    "static/js/main.cbe8cd52.js"
+  ]
+}

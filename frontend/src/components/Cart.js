@@ -12,7 +12,7 @@ const Cart = (props) => {
     const fetchCart = async () => {
         let sum = 0;
         //Haetaan backendistä data
-        const response = await axios.get("api/products/getShoppingCart/" + token);
+        const response = await axios.get("https://herkkugrillibackend.eerokokkonen.repl.co/api/products/getShoppingCart/" + token);
 
         if (response.data.length === 0){
             props.setEmptyCart(true);
@@ -51,7 +51,7 @@ const Cart = (props) => {
     const deleteFromCart = async (food) => {
         let response;
         try{
-            response = await axios.delete("api/products/deleteProductFromShoppingCart?email=" + token + "&productId=" + food.id);
+            response = await axios.delete("https://herkkugrillibackend.eerokokkonen.repl.co/api/products/deleteProductFromShoppingCart?email=" + token + "&productId=" + food.id);
             console.log(response.data);
             alert("Tuote poistettu ostoskortista!");
             window.location.reload();
@@ -62,8 +62,6 @@ const Cart = (props) => {
         }
         
     };
-
-    
 
     return(
         <div>

@@ -12,7 +12,7 @@ const ProfilePage = () => {
 
     const fetchProfile = async () => {
         try{
-            const response = await axios.get("api/users/getProfile/" + token);
+            const response = await axios.get("https://herkkugrillibackend.eerokokkonen.repl.co/api/users/getProfile/" + token);
             const profile = response.data;
 
             setUserProfile({
@@ -38,7 +38,7 @@ const ProfilePage = () => {
                 <h2>Profiili</h2>
                 <div className="profileRight">
                     <h3>Muokkaa profiilia</h3>
-                    <RegisterInput buttonText={"Tallenna"} userProfile={userProfile} apiUrl={"api/users/updateProfile"}/>
+                    <RegisterInput buttonText={"Tallenna"} userProfile={userProfile} apiUrl={"https://herkkugrillibackend.eerokokkonen.repl.co/api/users/updateProfile"}/>
                 </div>
                 <div className="profileLeft">
                     <button className="orderButton" onClick={() => {navigate("/orders")}}>Tilaukset</button>
